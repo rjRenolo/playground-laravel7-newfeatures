@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Http;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/example', function(){
+    $response = Http::get('https://jsonplaceholder.typicode.com/todos/1');
+    // dd($response->body());
+    dd($response->json());
+    // dd($response->status());
+    // dd($response->ok());
+    // dd($response->successful());
+    // dd($response->failed());
+    // dd($response->serverError());
+    // dd($response->clientError());
+    // dd($response->header($header));
+    // dd($response->headers());
 });
