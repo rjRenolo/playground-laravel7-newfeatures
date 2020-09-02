@@ -19,9 +19,11 @@ Route::get('/', function () {
 });
 
 Route::get('/example', function(){
-    $response = Http::get('https://jsonplaceholder.typicode.com/todos/1');
+    // $response = Http::get('https://jsonplaceholder.typicode.com/todos/1');
+    // $response = Http::get('https://jsonplaceholder.typicode.com/todos/1')['title'];
+    // dd($response);
     // dd($response->body());
-    dd($response->json());
+    // dd($response->json());
     // dd($response->status());
     // dd($response->ok());
     // dd($response->successful());
@@ -30,4 +32,13 @@ Route::get('/example', function(){
     // dd($response->clientError());
     // dd($response->header($header));
     // dd($response->headers());
+});
+
+Route::get('/post-request', function(){
+    $response = Http::post('https://jsonplaceholder.typicode.com/posts', [
+        'title'=> 'foo',
+        'body'=> 'bar',
+        'userId'=> 1
+    ]);
+    dd($response->json());
 });
