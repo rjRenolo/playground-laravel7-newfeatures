@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+//////////////////////////////////
+// SENDING A SIMPLE GET REQUEST //
+//////////////////////////////////
 Route::get('/example', function(){
     // $response = Http::get('https://jsonplaceholder.typicode.com/todos/1');
     // $response = Http::get('https://jsonplaceholder.typicode.com/todos/1')['title'];
@@ -34,6 +38,10 @@ Route::get('/example', function(){
     // dd($response->headers());
 });
 
+
+///////////////////////////////////
+// SENDING A SIMPLE POST REQUEST //
+///////////////////////////////////
 Route::get('/post-request', function(){
     $response = Http::post('https://jsonplaceholder.typicode.com/posts', [
         'title'=> 'foo',
@@ -42,3 +50,28 @@ Route::get('/post-request', function(){
     ]);
     dd($response->json());
 });
+
+
+////////////////////////////////////////////////////
+// SENDING A POST REQUEST WITH A HEADER SPECIFIED //
+////////////////////////////////////////////////////
+Route::get('/with-headers', function(){
+    $response = Http::withHeaders([
+        'X-First' => 'foo', // EXAMPLE OF A HEADER
+        'X-Second' => 'bar'
+    ])->post('http://test.com/users', [
+        'name' => 'Taylor',
+    ]);
+});
+
+/////////////////////////////////////////
+// SENDING A POST REQUEST WITH A TOKEN //
+/////////////////////////////////////////
+Route::get('/with-token', function(){
+    $response = Http::withToken('token goes here')->post('https://jsonplaceholder.typicode.com/posts', [
+        'title'=> 'foo',
+        'body'=> 'bar',
+        'userId'=> 1
+    ]);
+});
+
